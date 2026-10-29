@@ -23,6 +23,8 @@ import android.widget.Toast;
 
 public class WebActivity extends Activity {
 
+    public static final String EXTRA_URL = "url";
+
     // ====== CONFIGURAÇÃO ======
     private static final String START_URL = "https://cinehd.vc/";
     private static final String ALLOWED_HOST = "cinehd.vc";
@@ -63,7 +65,9 @@ public class WebActivity extends Activity {
             cursor.setCursor(cx, cy);
         });
 
-        web.loadUrl(START_URL);
+        String url = getIntent().getStringExtra(EXTRA_URL);
+        if (url == null || url.isEmpty()) url = START_URL;
+        web.loadUrl(url);
         Toast.makeText(this, "Botão menu ou vermelho: liga/desliga o cursor", Toast.LENGTH_LONG).show();
     }
 
